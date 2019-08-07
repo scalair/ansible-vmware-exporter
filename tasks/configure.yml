@@ -1,0 +1,32 @@
+---
+- name: Ensure the config file directory is present
+  file:
+    path: /etc/vmware_exporter
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Configure vmware_exporter
+  template:
+    src: config.yml.j2
+    dest: /etc/vmware_exporter/config.yml
+    owner: root
+    group: root
+    mode: '0644'
+  notify: restart vmware_exporter
+
+- name: Configure vmware_exporter.service systemd file
+  template:
+    src: vmware_exporter.service.j2
+    dest: /etc/systemd/system/vmware_exporter.service
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Ensure vmware_exporter.service is started and enabled at boot
+  systemd:
+    name: vmware_exporter.service
+    daemon_reload: yes
+    enabled: yes
+    state: started

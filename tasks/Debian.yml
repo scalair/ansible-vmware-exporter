@@ -1,0 +1,9 @@
+---
+- name: Ensure gcc and python36 dependencies are installed
+  apt:
+    name: 
+      - "gcc"
+      - "python36"
+      - "python36-devel"
+      - "python36-pip"
+    state: present

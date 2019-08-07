@@ -1,0 +1,13 @@
+#Put me in /lib/systemd/system/
+[Unit]
+Description=Prometheus vmware exporter
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/local/bin/vmware_exporter -c /etc/vmware_exporter/config.yml -p {{ vmware_exporter_port }}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

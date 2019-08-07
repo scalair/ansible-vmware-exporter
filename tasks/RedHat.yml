@@ -1,0 +1,9 @@
+---
+- name: Ensure python36 and pip36 are installed
+  yum:
+    name: 
+      - "gcc"
+      - "python36"
+      - "python36-devel"
+      - "python36-pip"
+    state: present

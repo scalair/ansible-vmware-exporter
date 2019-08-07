@@ -1,0 +1,6 @@
+---
+- name: Ensure vmware_exporter is installed (via pip3)
+  pip:
+    name: vmware_exporter
+    executable: /bin/pip3
+    state: present

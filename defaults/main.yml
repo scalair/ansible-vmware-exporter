@@ -1,0 +1,26 @@
+---
+# defaults file for jdelvecchio.prometheus-vmware-exporter
+vmware_exporter_port: 9272
+vmware_exporter_targets:
+  - default:
+      vsphere_host: "vcenter"
+      vsphere_user: "user"
+      vsphere_password: "password"
+      ignore_ssl: False
+      collect_only:
+        vms: True
+        snapshots: True
+        vmguests: True
+        datastores: True
+        hosts: True
+  - limited:
+      vsphere_host: "slowvc.example.com"
+      vsphere_user: "administrator@vsphere.local"
+      vsphere_password: "password"
+      ignore_ssl: True
+      collect_only:
+        vms: False
+        snapshots: False
+        vmguests: False
+        datastores: True
+        hosts: False
