@@ -1,31 +1,71 @@
-Role Name
+Ansible role : VMware exporter
 =========
 
-A brief description of the role goes here.
+Installs and configures [VMware exporter](https://github.com/pryorda/vmware_exporter), an exporter used by [Prometheus](https://github.com/prometheus/prometheus).
 
 Requirements
 ------------
+No special requirements; note that this role requires root access, so has to be ran with `become: yes`
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
 
 Role Variables
 --------------
+Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+```yaml
+vmware_exporter_port: 9272
+```
+The port on which the vmware_exporter http endpoint will be published.
+
+```yaml
+vmware_exporter_targets: []
+```
+This variable contains a list of sections (vsphere hosts) that the vmware_exporter will connect to.
+It is based on the configuration file of the [VMware exporter](https://github.com/pryorda/vmware_exporter), so please refer to that before setting this variable.
+
+Examples are provided below in 'Example Playbook' or in `defaults/main.yml`.
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+- geerlingguy.repo-epel if you're using CentOS or a Red Hat derivative.
+
 
 Example Playbook
 ----------------
+```yaml
+- hosts: vmware_exporter_servers
+  become: yes
+  vars:
+    vmware_exporter_targets:
+      - default:
+          vsphere_host: "vcenter"
+          vsphere_user: "user"
+          vsphere_password: "password"
+          ignore_ssl: False
+          collect_only:
+            vms: True
+            snapshots: True
+            vmguests: True
+            datastores: True
+            hosts: True
+      - limited:
+          vsphere_host: "slowvc.example.com"
+          vsphere_user: "administrator@vsphere.local"
+          vsphere_password: "password"
+          ignore_ssl: True
+          collect_only:
+            vms: False
+            snapshots: False
+            vmguests: False
+            datastores: True
+            hosts: False
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+  roles:
+    - role: geerlingguy.repo-epel
+      when: ansible_os_family == 'RedHat'
+    - jdelvecchio.vmware_exporter
+```
 
 License
 -------
@@ -35,4 +75,4 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+This role was created in 2019 by Julien Delvecchio.
