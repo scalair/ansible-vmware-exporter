@@ -1,7 +1,5 @@
 ---
-# handlers file for jdelvecchio.prometheus-vmware-exporter
 - name: restart vmware_exporter
   systemd:
     name: vmware_exporter.service
     state: restarted
-

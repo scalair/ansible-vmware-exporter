@@ -1,0 +1,18 @@
+---
+- name: Redhat - Ensure gcc, python3, pyOpenSSL and pip3 are installed
+  yum:
+    name:
+      - gcc
+      - python-setuptools
+      - python36
+      - python36-devel
+      - python36-pip
+      - python36-pyOpenSSL
+    state: present
+    update_cache: yes
+
+- name: Ensure vmware_exporter is installed (via pip3)
+  pip:
+    name: vmware_exporter
+    executable: /bin/pip3
+    state: present

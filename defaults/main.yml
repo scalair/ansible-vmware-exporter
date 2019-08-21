@@ -1,5 +1,4 @@
 ---
-# defaults file for jdelvecchio.prometheus-vmware-exporter
 vmware_exporter_port: 9272
 vmware_exporter_targets:
   - default:
