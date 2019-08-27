@@ -1,5 +1,5 @@
 ---
 # Setup/install tasks.
-- include_tasks: install-{{ansible_os_family}}.yml
+- include_tasks: install-{{ ansible_os_family }}.yml
 
 - include_tasks: configure.yml

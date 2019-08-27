@@ -1,0 +1,18 @@
+---
+- name: Converge
+  hosts: all
+  become: yes
+  roles:
+    - role: geerlingguy.repo-epel
+      when: ansible_os_family == 'RedHat'
+    - scalair.vmware-exporter
+
+  post_tasks:
+    - name: Ensure vmware_exporter is running on the specified port.
+      uri:
+        url: "http://127.0.0.1:{{ vmware_exporter_port }}"
+        status_code: 200
+      register: result
+      until: result.status == 200
+      retries: 60
+      delay: 1

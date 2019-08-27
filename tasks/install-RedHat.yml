@@ -1,8 +1,7 @@
 ---
-- name: Redhat - Ensure gcc, python3, pyOpenSSL and pip3 are installed
+- name: Redhat - Ensure python3, pyOpenSSL and pip3 are installed
   yum:
     name:
-      - gcc
       - python-setuptools
       - python36
       - python36-devel

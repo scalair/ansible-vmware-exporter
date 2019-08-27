@@ -1,8 +1,7 @@
 ---
-- name: Debian - Ensure gcc, python3 and pip3 are installed
+- name: Debian - Ensure python3 and pip3 are installed
   apt:
     name:
-      - gcc
       - python-setuptools
       - python3
       - python3-dev

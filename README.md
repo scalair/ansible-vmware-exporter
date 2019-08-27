@@ -64,7 +64,7 @@ Example Playbook
   roles:
     - role: geerlingguy.repo-epel
       when: ansible_os_family == 'RedHat'
-    - jdelvecchio.vmware_exporter
+    - scalair.vmware_exporter
 ```
 
 License
