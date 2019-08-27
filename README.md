@@ -1,5 +1,6 @@
 Ansible role : VMware exporter
 =========
+[![Build Status](https://travis-ci.org/scalair/ansible-vmware-exporter.svg?branch=master)](https://travis-ci.org/scalair/ansible-vmware-exporter)
 
 Installs and configures [VMware exporter](https://github.com/pryorda/vmware_exporter), an exporter used by [Prometheus](https://github.com/prometheus/prometheus).
 
